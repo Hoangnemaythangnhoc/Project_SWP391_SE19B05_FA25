@@ -46,9 +46,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await authService.login(email, password, rememberMe)
       if (result.success) {
-        setUser(result.data.user)
-        setIsAuthenticated(true)
-        return { success: true }
+        const me = await authService.getCurrentUser()
+        if (me.success) {
+          setUser(me.data)
+          setIsAuthenticated(true)
+          return { success: true }
+        }
+        return { success: false, error: me.error || 'Không thể lấy thông tin người dùng' }
       } else {
         return { success: false, error: result.error }
       }
@@ -61,9 +65,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await authService.register(userData)
       if (result.success) {
-        setUser(result.data.user)
-        setIsAuthenticated(true)
-        return { success: true }
+        const me = await authService.getCurrentUser()
+        if (me.success) {
+          setUser(me.data)
+          setIsAuthenticated(true)
+          return { success: true }
+        }
+        return { success: false, error: me.error || 'Không thể lấy thông tin người dùng' }
       } else {
         return { success: false, error: result.error }
       }

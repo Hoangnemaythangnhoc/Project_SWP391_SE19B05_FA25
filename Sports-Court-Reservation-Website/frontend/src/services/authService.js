@@ -52,7 +52,7 @@ class AuthService {
     }
   }
 
-  async refreshToken() {
+  async refreshAccessToken() {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
@@ -177,7 +177,7 @@ class AuthService {
 
     // If token is expired, try to refresh
     if (response.status === 401 && this.refreshToken) {
-      const refreshResult = await this.refreshToken();
+      const refreshResult = await this.refreshAccessToken();
       if (refreshResult.success) {
         // Retry the request with new token
         const retryOptions = {
