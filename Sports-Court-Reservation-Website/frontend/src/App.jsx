@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Fields from './pages/Fields'
 import FieldDetail from './pages/FieldDetail'
@@ -23,6 +24,7 @@ function App() {
                 <main className="flex-1">
                   <Fields />
                 </main>
+                <Footer />
               </div>
             } />
             <Route path="/field/:id" element={
